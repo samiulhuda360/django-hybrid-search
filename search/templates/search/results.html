@@ -1,0 +1,57 @@
+{% extends "search/base.html" %}
+{% block title %}{{ query }} - Hybrid Search{% endblock %}
+{% block header_search %}{% include "search/_searchbox.html" %}{% endblock %}
+{% block content %}
+{% if no_index %}
+<p class="empty">No index yet. Run <code>python manage.py demo</code> first.</p>
+{% else %}
+<div class="toolbar">
+  <div class="modes" role="tablist" aria-label="Ranking method">
+    {% for m in modes %}
+    <a role="tab" href="?q={{ query|urlencode }}&amp;mode={{ m }}" class="{% if m == mode %}active{% endif %}" aria-selected="{% if m == mode %}true{% else %}false{% endif %}">
+      {% if m == "hybrid" %}Hybrid{% elif m == "bm25" %}Keyword (BM25){% else %}Semantic{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% if result %}<p class="meta">{{ result.total }} page{{ result.total|pluralize }} · {{ result.elapsed_ms|floatformat:1 }} ms</p>{% endif %}
+</div>
+
+{% if suggestion %}
+<p class="didyoumean">Did you mean <a href="?q={{ suggestion|urlencode }}&amp;mode={{ mode }}">{{ suggestion }}</a>?</p>
+{% endif %}
+
+{% if query and rows and start_rank == 0 %}
+<section class="answer" data-answer-url="{% url 'search:api_answer' %}?q={{ query|urlencode }}&amp;mode={{ mode }}" aria-live="polite">
+  <header><span class="answer-label">Answer</span><span class="answer-mode"></span></header>
+  <div class="answer-body"><span class="loading">Reading the top pages…</span></div>
+  <ol class="answer-sources"></ol>
+</section>
+{% endif %}
+
+{% if query and not rows %}
+<p class="empty">No pages match <strong>{{ query }}</strong>. Try fewer or different words.</p>
+{% endif %}
+
+<ol class="results" start="{{ start_rank|add:1 }}">
+{% for row in rows %}
+  <li class="result">
+    <a class="result-title" href="{{ row.hit.url }}">{{ row.title }}</a>
+    <div class="result-url">{{ row.hit.url }}{% if row.heading %} › {{ row.heading }}{% endif %}</div>
+    <p class="snippet">{{ row.snippet }}</p>
+    <div class="ranks">
+      {% if mode != "semantic" %}<span title="Rank of this page in the keyword (BM25) ranking">BM25 {% if row.hit.bm25_rank %}#{{ row.hit.bm25_rank }}{% else %}—{% endif %}</span>{% endif %}
+      {% if mode != "bm25" %}<span title="Rank of this page in the embedding ranking">Semantic {% if row.hit.semantic_rank %}#{{ row.hit.semantic_rank }}{% else %}—{% endif %}</span>{% endif %}
+    </div>
+  </li>
+{% endfor %}
+</ol>
+
+{% if page_obj and page_obj.paginator.num_pages > 1 %}
+<nav class="pager">
+  {% if page_obj.has_previous %}<a href="?q={{ query|urlencode }}&amp;mode={{ mode }}&amp;page={{ page_obj.previous_page_number }}">← Previous</a>{% endif %}
+  <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+  {% if page_obj.has_next %}<a href="?q={{ query|urlencode }}&amp;mode={{ mode }}&amp;page={{ page_obj.next_page_number }}">Next →</a>{% endif %}
+</nav>
+{% endif %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,9 @@
+<form class="searchbox{% if large %} searchbox-large{% endif %}" action="{% url 'search:results' %}" method="get" role="search" autocomplete="off">
+  <div class="field">
+    <input type="search" name="q" value="{{ query|default:'' }}" placeholder="Ask the docs: how do I undo a deploy?"
+           aria-label="Search" data-suggest-url="{% url 'search:api_suggest' %}" {% if large %}autofocus{% endif %}>
+    <ul class="suggestions" role="listbox" hidden></ul>
+  </div>
+  <input type="hidden" name="mode" value="{{ mode|default:'hybrid' }}">
+  <button type="submit">Search</button>
+</form>

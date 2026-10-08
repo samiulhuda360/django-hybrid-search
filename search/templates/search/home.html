@@ -1,0 +1,22 @@
+{% extends "search/base.html" %}
+{% block body_class %}home{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Search the docs the way you would ask a colleague.</h1>
+  <p class="lede">Keyword matching (BM25) and meaning (sentence embeddings) are ranked together, so “undo a bad release” finds the page called <em>Roll back a release</em>.</p>
+  {% include "search/_searchbox.html" with large=True %}
+  <p class="examples">Try:
+    {% for ex in examples %}<a href="{% url 'search:results' %}?q={{ ex|urlencode }}">{{ ex }}</a>{% if not forloop.last %} · {% endif %}{% endfor %}
+  </p>
+</section>
+<section class="stats">
+  {% if page_count %}
+  <div><strong>{{ page_count }}</strong><span>pages indexed</span></div>
+  <div><strong>{{ passage_count }}</strong><span>passages</span></div>
+  <div><strong>{{ embedder }}</strong><span>embedding model</span></div>
+  {% if last_job %}<div><strong>{{ last_job.get_status_display }}</strong><span>last crawl, {{ last_job.finished_at|timesince }} ago</span></div>{% endif %}
+  {% else %}
+  <p class="empty">No index yet. Run <code>python manage.py demo</code>, or create a crawl job in the <a href="/admin/">admin</a>.</p>
+  {% endif %}
+</section>
+{% endblock %}

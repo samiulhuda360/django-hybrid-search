@@ -1,0 +1,23 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Hybrid Search{% endblock %}</title>
+<link rel="stylesheet" href="{% static 'search/app.css' %}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='13' cy='13' r='8' fill='none' stroke='%231f5f5b' stroke-width='4'/%3E%3Cpath d='M19 19l8 8' stroke='%231f5f5b' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+<header class="site-header">
+  <a class="brand" href="{% url 'search:home' %}">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="13" r="8"/><path d="M19 19l8 8"/></svg>
+    Hybrid&nbsp;Search
+  </a>
+  {% block header_search %}{% endblock %}
+  <nav><a href="{% url 'search:about' %}">Index</a><a href="/admin/">Admin</a></nav>
+</header>
+<main>{% block content %}{% endblock %}</main>
+<footer class="site-footer">BM25 + embeddings, fused with Reciprocal Rank Fusion. Content: the bundled Acme Deploy docs (a fictional product).</footer>
+<script src="{% static 'search/app.js' %}" defer></script>
+</body>
+</html>

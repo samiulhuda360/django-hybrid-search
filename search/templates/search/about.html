@@ -1,0 +1,30 @@
+{% extends "search/base.html" %}
+{% block title %}Index - Hybrid Search{% endblock %}
+{% block header_search %}{% include "search/_searchbox.html" %}{% endblock %}
+{% block content %}
+<h1 class="page-title">What is in the index</h1>
+{% if index %}
+<section class="stats">
+  <div><strong>{{ index.page_count }}</strong><span>pages</span></div>
+  <div><strong>{{ index.chunks|length }}</strong><span>passages</span></div>
+  <div><strong>{{ index.bm25.postings|length }}</strong><span>distinct terms</span></div>
+  <div><strong>{{ index.embedder.name }}</strong><span>embedder</span></div>
+</section>
+{% endif %}
+<h2>Crawl outcomes</h2>
+<table class="table">
+  <thead><tr><th>Outcome</th><th>Pages</th></tr></thead>
+  <tbody>{% for label, n in counts.items %}<tr><td>{{ label }}</td><td>{{ n }}</td></tr>{% endfor %}</tbody>
+</table>
+<h2>Recent crawl jobs</h2>
+<table class="table">
+  <thead><tr><th>Job</th><th>Status</th><th>Indexed</th><th>Skipped</th><th>Failed</th><th>Finished</th></tr></thead>
+  <tbody>
+  {% for job in jobs %}
+    <tr><td>{{ job.name }}<br><small>{{ job.seed_url }}</small></td><td>{{ job.get_status_display }}</td><td>{{ job.pages_indexed }}</td><td>{{ job.pages_skipped }}</td><td>{{ job.pages_failed }}</td><td>{{ job.finished_at|date:"Y-m-d H:i" }}</td></tr>
+  {% empty %}
+    <tr><td colspan="6">No crawl jobs yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
