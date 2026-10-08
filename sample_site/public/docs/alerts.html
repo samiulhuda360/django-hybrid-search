@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alerts - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Monitoring</nav>
+<h1>Alerts</h1>
+<p>Alerts notify you when something is wrong, so you do not have to watch the dashboard.</p>
+<h2>Creating an alert rule</h2>
+<p>Open Monitoring, Alerts and choose a metric, a threshold and a duration, for example error rate above 2 percent for 5 minutes. A rule can also fire when an instance crashes or a deploy fails.</p>
+<h2>Notification channels</h2>
+<p>Alerts can be sent by email, to a webhook address, or to a team chat channel. Each rule can use several channels.</p>
+<h2>Avoiding noise</h2>
+<p>Use a duration of at least a few minutes so short spikes do not wake anyone up. Every alert also sends a message when the problem is resolved.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/metrics.html">Metrics</a></li><li><a href="/docs/webhooks.html">Webhooks</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

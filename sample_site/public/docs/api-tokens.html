@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>API tokens - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Accounts</nav>
+<h1>API tokens</h1>
+<p>API tokens let scripts and CI jobs use the CLI and the REST API without a browser login.</p>
+<h2>Creating a token</h2>
+<p>Open Account settings, Tokens and choose Create token. Give it a name, a team and an expiry date. The token is shown once, so copy it into your CI secret store straight away.</p>
+<h2>Scopes</h2>
+<p>A token can be limited to reading, deploying or full access. Use the smallest scope that works.</p>
+<h2>Revoking a token</h2>
+<p>Delete a token in Account settings to stop it working immediately. Tokens that have not been used for 90 days are flagged so you can remove them.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/cli-login.html">Log in from the CLI</a></li><li><a href="/docs/rest-api.html">REST API</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

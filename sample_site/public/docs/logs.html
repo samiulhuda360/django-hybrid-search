@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Logs - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Monitoring</nav>
+<h1>Logs</h1>
+<p>Anything your app prints to standard output or standard error is collected as logs.</p>
+<h2>Viewing logs</h2>
+<p>Run acme logs to see recent lines, or acme logs --tail to follow them live. Filter by process with --process worker. The dashboard has the same view with search.</p>
+<h2>Retention</h2>
+<p>Logs are kept for 7 days on the Starter plan and 30 days on paid plans.</p>
+<h2>Sending logs elsewhere</h2>
+<p>A log drain forwards every line to another service over HTTPS or syslog. Add one with acme drains add followed by the destination address. Drains are useful for keeping logs longer or searching them with your own tools.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/metrics.html">Metrics</a></li><li><a href="/docs/alerts.html">Alerts</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

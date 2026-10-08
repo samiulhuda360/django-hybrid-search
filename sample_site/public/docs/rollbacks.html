@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Roll back a release - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Deploys</nav>
+<h1>Roll back a release</h1>
+<p>Every successful deploy creates a release that you can return to.</p>
+<h2>Rolling back</h2>
+<p>Run acme rollback to return to the previous release, or acme rollback v42 to pick a specific one. In the dashboard open Deploys, find the release and choose Roll back. The old image starts again without a new build, so a rollback usually takes under a minute.</p>
+<h2>What is not rolled back</h2>
+<p>A rollback restores your code and its settings at that time. It does not undo database migrations or changes to stored files. Write migrations that work with both the old and the new code, so you can always go back safely.</p>
+<h2>Keeping releases</h2>
+<p>The last 50 releases are kept for each project.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/deploys.html">How deploys work</a></li><li><a href="/docs/database-backups.html">Database backups and restore</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

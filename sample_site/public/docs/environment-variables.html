@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Environment variables - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Configuration</nav>
+<h1>Environment variables</h1>
+<p>Environment variables hold settings that change between environments, such as a database address or a feature flag.</p>
+<h2>Setting a variable</h2>
+<p>Run acme env set NAME=value, or add it in the dashboard under Settings, Variables. Changing a variable restarts the app so the new value is picked up.</p>
+<h2>Per-environment values</h2>
+<p>Production and preview environments keep separate values. A variable set with the flag --preview applies only to preview environments, which is useful for pointing previews at a test database.</p>
+<h2>Reading values</h2>
+<p>Run acme env list to print variable names. Values are hidden by default; add --show to reveal them. Never store passwords or keys as plain variables. Use secrets instead, which are encrypted and never printed.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/secrets.html">Secrets</a></li><li><a href="/docs/preview-environments.html">Preview environments</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Database backups and restore - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Data</nav>
+<h1>Database backups and restore</h1>
+<p>Managed databases are backed up automatically.</p>
+<h2>Daily backups</h2>
+<p>A full backup is taken every day and kept for 7 days on the Starter plan and 30 days on paid plans. Run acme db backups to list them.</p>
+<h2>Point-in-time recovery</h2>
+<p>Paid plans can restore the database to any minute within the retention window. This is the way to recover from an accidental delete or a bad migration. The restore creates a new database, so the current one is untouched until you switch.</p>
+<h2>Manual backups</h2>
+<p>Run acme db backup before risky work to take an extra backup on demand. You can also download any backup as a dump file.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/databases.html">Managed PostgreSQL</a></li><li><a href="/docs/rollbacks.html">Roll back a release</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Object storage - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Data</nav>
+<h1>Object storage</h1>
+<p>Object storage keeps files such as user uploads, images and exports outside your app instances.</p>
+<h2>Why not the local disk</h2>
+<p>The disk of an instance is temporary. It is wiped on every deploy and restart, and it is not shared between instances. Files that must last belong in object storage.</p>
+<h2>Creating a bucket</h2>
+<p>Run acme buckets create uploads. Access keys are added to the project as secrets. The storage speaks the common S3 protocol, so most libraries work unchanged.</p>
+<h2>Public files</h2>
+<p>Buckets are private by default. Mark a bucket public to serve images directly, or create signed links that expire after a set time.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/secrets.html">Secrets</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How deploys work - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Deploys</nav>
+<h1>How deploys work</h1>
+<p>A deploy builds your code, starts the new release next to the old one, and switches traffic once the new release is healthy.</p>
+<h2>Zero-downtime releases</h2>
+<p>New instances must pass their health check before they receive requests. Old instances keep serving until the switch, then get 30 seconds to finish open requests before they stop. Users never see an error page during a normal deploy.</p>
+<h2>Deploying from Git</h2>
+<p>Connect the repository in the dashboard to deploy automatically on every push to the main branch. Pushes to other branches can create preview environments.</p>
+<h2>Pausing traffic</h2>
+<p>For planned work on a database you can switch on maintenance mode, which shows a holding page instead of your app.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/health-checks.html">Health checks</a></li><li><a href="/docs/rollbacks.html">Roll back a release</a></li><li><a href="/docs/maintenance-mode.html">Maintenance mode</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

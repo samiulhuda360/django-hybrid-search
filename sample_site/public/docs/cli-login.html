@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Log in from the CLI - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Basics</nav>
+<h1>Log in from the CLI</h1>
+<p>The CLI needs to know who you are before it can deploy.</p>
+<h2>Interactive login</h2>
+<p>Run acme login. A browser window opens and asks you to approve the session. After you approve it, the CLI stores a session key in the .acme folder in your home directory. Sessions last 30 days.</p>
+<h2>Logging in on a server or in CI</h2>
+<p>Browsers are not available in continuous integration jobs. Create an API token in the dashboard and set it in the ACME_TOKEN environment variable. The CLI uses the token automatically and never opens a browser.</p>
+<h2>Logging out</h2>
+<p>Run acme logout to delete the stored session from this computer. To end every session at once, for example after losing a laptop, open Account settings and choose Sign out everywhere.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/api-tokens.html">API tokens</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

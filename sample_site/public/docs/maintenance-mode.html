@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Maintenance mode - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Deploys</nav>
+<h1>Maintenance mode</h1>
+<p>Maintenance mode shows a holding page instead of your app, for example during a large database migration.</p>
+<h2>Turning it on and off</h2>
+<p>Run acme maintenance on and acme maintenance off. The page returns status 503 with a Retry-After header, so search engines do not drop your pages.</p>
+<h2>Custom page</h2>
+<p>Add a maintenance.html file to the project settings to replace the default holding page with your own design.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/deploys.html">How deploys work</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

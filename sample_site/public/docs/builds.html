@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>How builds work - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Builds</nav>
+<h1>How builds work</h1>
+<p>Every deploy starts with a build that turns your source code into a runnable image.</p>
+<h2>Buildpacks</h2>
+<p>By default Acme Deploy detects your language from files such as requirements.txt, package.json or go.mod and uses a matching buildpack. Buildpacks install dependencies and set a sensible start command without any configuration.</p>
+<h2>Dockerfiles</h2>
+<p>If the repository contains a Dockerfile, or the build section of acme.toml says builder = &quot;docker&quot;, the platform builds the image from your Dockerfile instead.</p>
+<h2>Build limits</h2>
+<p>Builds have 4 GB of memory and 30 minutes on every plan. Build output, including warnings, appears live in the CLI and in the dashboard under Deploys.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/dockerfile-builds.html">Build with a Dockerfile</a></li><li><a href="/docs/build-cache.html">Build cache</a></li><li><a href="/docs/build-failures.html">Fix a failed build</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

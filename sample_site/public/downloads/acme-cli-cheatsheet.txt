@@ -1,0 +1,5 @@
+acme login            sign in
+acme init             create a project
+acme deploy           build and release
+acme rollback         return to the previous release
+acme logs --tail      follow logs

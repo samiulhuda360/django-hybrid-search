@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The acme.toml file - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Configuration</nav>
+<h1>The acme.toml file</h1>
+<p>Each project keeps its settings in a file called acme.toml at the root of the repository. Keeping settings in the repository means every change is reviewed and versioned with your code.</p>
+<h2>Common settings</h2>
+<p>The name field sets the project name. The region field picks where the app runs. The build section chooses a buildpack or a Dockerfile. The run section sets the start command and the port your app listens on, which defaults to 8080.</p>
+<h2>Processes</h2>
+<p>List extra processes under processes, for example a web process and a worker process. Each process can have its own instance size and instance count.</p>
+<h2>Validating the file</h2>
+<p>Run acme config check before you commit. It reports unknown keys, wrong types and missing start commands, and exits with a non-zero code so it can run in CI.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/environment-variables.html">Environment variables</a></li><li><a href="/docs/background-workers.html">Background workers</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

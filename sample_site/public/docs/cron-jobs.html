@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scheduled jobs - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Running apps</nav>
+<h1>Scheduled jobs</h1>
+<p>Scheduled jobs run a command on a timetable, such as a nightly report or clearing old sessions.</p>
+<h2>Defining a job</h2>
+<p>Add a cron section to acme.toml with a schedule and a command, for example schedule = &quot;0 3 * * *&quot; to run at 03:00 every day. Times are in UTC.</p>
+<h2>How jobs run</h2>
+<p>Each run starts a fresh instance from the current release with the same variables and secrets as the app. A run that lasts longer than 60 minutes is stopped.</p>
+<h2>Checking results</h2>
+<p>Run acme cron list to see the last run of every job and its exit code. Output appears in the logs under the process name cron.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/background-workers.html">Background workers</a></li><li><a href="/docs/logs.html">Logs</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

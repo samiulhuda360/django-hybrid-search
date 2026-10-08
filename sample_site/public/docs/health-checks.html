@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Health checks - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Deploys</nav>
+<h1>Health checks</h1>
+<p>Health checks tell the platform whether an instance is ready to receive traffic.</p>
+<h2>Configuring the check</h2>
+<p>Set health_check.path in acme.toml, for example /healthz. The platform sends a GET request to that path every 10 seconds. Any response with a status code from 200 to 399 counts as healthy.</p>
+<h2>Timeouts and failures</h2>
+<p>A check that takes longer than 5 seconds counts as a failure. After three failures in a row the instance is restarted. During a deploy, a new release that never becomes healthy within 5 minutes is cancelled and the old release keeps running.</p>
+<h2>What to check</h2>
+<p>Keep the endpoint fast. Confirm the app can reach its database, but do not call slow external services, or one outside problem can restart every instance.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/deploys.html">How deploys work</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

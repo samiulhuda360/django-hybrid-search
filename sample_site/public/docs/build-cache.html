@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Build cache - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Builds</nav>
+<h1>Build cache</h1>
+<p>The build cache keeps downloaded dependencies between builds so later builds finish faster.</p>
+<h2>What is cached</h2>
+<p>Buildpacks cache package downloads, such as pip wheels, npm packages and Go modules. Dockerfile builds reuse unchanged layers.</p>
+<h2>Clearing the cache</h2>
+<p>A corrupted or outdated cache can cause strange build errors. Run acme deploy --no-cache to build from scratch once, or choose Clear build cache in the project settings. The next build will be slower while the cache fills again.</p>
+<h2>Cache size</h2>
+<p>Each project keeps up to 5 GB of cache. The oldest entries are removed first when the limit is reached.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/build-failures.html">Fix a failed build</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

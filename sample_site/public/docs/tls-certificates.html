@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HTTPS and TLS certificates - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Networking</nav>
+<h1>HTTPS and TLS certificates</h1>
+<p>Every app is served over HTTPS. Certificates are issued and renewed automatically, at no cost.</p>
+<h2>Automatic certificates</h2>
+<p>After a custom domain&#x27;s DNS records are correct, a certificate is issued within a few minutes. It is renewed 30 days before it expires, with no action from you.</p>
+<h2>Bringing your own certificate</h2>
+<p>On the Business plan you can upload your own certificate and private key with acme certs add. You are then responsible for renewing it before it expires.</p>
+<h2>Redirecting HTTP</h2>
+<p>Plain HTTP requests are redirected to HTTPS by default. You can also turn on HSTS in the domain settings so browsers always use the secure address.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/custom-domains.html">Custom domains</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

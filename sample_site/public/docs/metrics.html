@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Metrics - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Monitoring</nav>
+<h1>Metrics</h1>
+<p>The Metrics tab shows how your app is behaving over time.</p>
+<h2>Available charts</h2>
+<p>Charts cover CPU use, memory use, requests per minute, response time at the 50th, 95th and 99th percentile, and the share of responses with a 5xx status code.</p>
+<h2>Reading the charts</h2>
+<p>A slow climb in memory that resets on every deploy usually means a memory leak. A jump in response time together with high CPU suggests the app needs more instances. Events such as deploys and restarts are marked on every chart.</p>
+<h2>Exporting metrics</h2>
+<p>Metrics can be read through the REST API, one data point per minute, for the last 14 days.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/alerts.html">Alerts</a></li><li><a href="/docs/scaling.html">Scaling</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

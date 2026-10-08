@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Monorepos - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Configuration</nav>
+<h1>Monorepos</h1>
+<p>A monorepo holds several apps in one Git repository.</p>
+<h2>Deploying a subfolder</h2>
+<p>Set root_dir in acme.toml to the folder of the app, for example apps/web. The build only sees that folder unless you also list shared folders under build.include.</p>
+<h2>Skipping unrelated builds</h2>
+<p>Set build.watch to a list of paths. A push that changes none of those paths does not start a new deploy, which saves build minutes.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/config-file.html">The acme.toml file</a></li><li><a href="/docs/builds.html">How builds work</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

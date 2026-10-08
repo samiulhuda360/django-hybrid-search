@@ -1,0 +1,443 @@
+# Source for the bundled "Acme Deploy" documentation site.
+# Acme Deploy is a fictional hosting platform. Each page starts with "@@ slug | Title | Section".
+# Lines starting with "## " are headings; "-> slug" lines add "See also" links; other lines are paragraphs.
+# Run `python scripts/build_sample_site.py` to regenerate the HTML in sample_site/public/.
+
+@@ getting-started | Quick start | Basics
+Acme Deploy runs your web application on managed servers. This guide takes you from an empty account to a live URL in about ten minutes.
+## Before you begin
+You need an Acme Deploy account, a Git repository with your application, and a terminal. Any language that listens on an HTTP port works, including Python, Node.js, Go, Ruby and Java.
+## Your first deploy
+Install the command-line tool, run acme login, then run acme init inside your project folder. The init command detects your language, writes an acme.toml file and creates a project. Run acme deploy to upload the code. When the build finishes, the command prints the public address of your app, ending in acme.app.
+## Next steps
+Add environment variables for your settings, connect a custom domain, and turn on alerts so you hear about problems before your users do.
+-> install-cli
+-> config-file
+-> deploys
+
+@@ install-cli | Install the CLI | Basics
+The acme command-line tool deploys code, streams logs and manages projects from your terminal.
+## macOS and Linux
+Run the install script from the downloads page, or use Homebrew with brew install acme. The script places a single binary in /usr/local/bin.
+## Windows
+Download the installer from the downloads page, or run winget install acme. Open a new PowerShell window afterwards so the PATH change takes effect.
+## Upgrading and removing
+Run acme upgrade to move to the newest release. The CLI checks for updates once a day and prints a notice when one is available. To uninstall, delete the binary and the configuration folder in your home directory, called .acme.
+## Checking the version
+Run acme version. Support may ask for this number when you report a problem.
+-> cli-login
+
+@@ cli-login | Log in from the CLI | Basics
+The CLI needs to know who you are before it can deploy.
+## Interactive login
+Run acme login. A browser window opens and asks you to approve the session. After you approve it, the CLI stores a session key in the .acme folder in your home directory. Sessions last 30 days.
+## Logging in on a server or in CI
+Browsers are not available in continuous integration jobs. Create an API token in the dashboard and set it in the ACME_TOKEN environment variable. The CLI uses the token automatically and never opens a browser.
+## Logging out
+Run acme logout to delete the stored session from this computer. To end every session at once, for example after losing a laptop, open Account settings and choose Sign out everywhere.
+-> api-tokens
+
+@@ config-file | The acme.toml file | Configuration
+Each project keeps its settings in a file called acme.toml at the root of the repository. Keeping settings in the repository means every change is reviewed and versioned with your code.
+## Common settings
+The name field sets the project name. The region field picks where the app runs. The build section chooses a buildpack or a Dockerfile. The run section sets the start command and the port your app listens on, which defaults to 8080.
+## Processes
+List extra processes under processes, for example a web process and a worker process. Each process can have its own instance size and instance count.
+## Validating the file
+Run acme config check before you commit. It reports unknown keys, wrong types and missing start commands, and exits with a non-zero code so it can run in CI.
+-> environment-variables
+-> background-workers
+
+@@ environment-variables | Environment variables | Configuration
+Environment variables hold settings that change between environments, such as a database address or a feature flag.
+## Setting a variable
+Run acme env set NAME=value, or add it in the dashboard under Settings, Variables. Changing a variable restarts the app so the new value is picked up.
+## Per-environment values
+Production and preview environments keep separate values. A variable set with the flag --preview applies only to preview environments, which is useful for pointing previews at a test database.
+## Reading values
+Run acme env list to print variable names. Values are hidden by default; add --show to reveal them. Never store passwords or keys as plain variables. Use secrets instead, which are encrypted and never printed.
+-> secrets
+-> preview-environments
+
+@@ secrets | Secrets | Configuration
+Secrets are encrypted values such as API keys, database passwords and signing keys.
+## Adding a secret
+Run acme secrets set PAYMENTS_API_KEY and paste the value when prompted, so it does not end up in your shell history. Secrets reach your app as environment variables at runtime, but they are encrypted at rest and are never shown again in the dashboard or the CLI.
+## Rotating a secret
+To replace a key, set the secret again with the new value. The app restarts with zero downtime. Keep the old key valid at the provider until the new release is healthy, then revoke it.
+## Who can see secrets
+Only owners and admins can create or change secrets. Developers can deploy apps that use them but cannot read the values.
+-> teams-and-roles
+
+@@ builds | How builds work | Builds
+Every deploy starts with a build that turns your source code into a runnable image.
+## Buildpacks
+By default Acme Deploy detects your language from files such as requirements.txt, package.json or go.mod and uses a matching buildpack. Buildpacks install dependencies and set a sensible start command without any configuration.
+## Dockerfiles
+If the repository contains a Dockerfile, or the build section of acme.toml says builder = "docker", the platform builds the image from your Dockerfile instead.
+## Build limits
+Builds have 4 GB of memory and 30 minutes on every plan. Build output, including warnings, appears live in the CLI and in the dashboard under Deploys.
+-> dockerfile-builds
+-> build-cache
+-> build-failures
+
+@@ dockerfile-builds | Build with a Dockerfile | Builds
+Use a Dockerfile when you need system packages, a specific base image or full control over the image.
+## Requirements
+The image must start a process that listens on the port set in acme.toml. Multi-stage builds are supported and keep the final image small. Build arguments can be passed with build.args in acme.toml.
+## Private base images
+To pull a base image from a private registry, save the registry password as a secret named REGISTRY_PASSWORD and set build.registry_user in acme.toml.
+## Tips
+Copy dependency files and install packages before copying the rest of the source code. Docker then reuses the dependency layer when only your code changes, which makes builds much faster.
+-> build-cache
+
+@@ build-cache | Build cache | Builds
+The build cache keeps downloaded dependencies between builds so later builds finish faster.
+## What is cached
+Buildpacks cache package downloads, such as pip wheels, npm packages and Go modules. Dockerfile builds reuse unchanged layers.
+## Clearing the cache
+A corrupted or outdated cache can cause strange build errors. Run acme deploy --no-cache to build from scratch once, or choose Clear build cache in the project settings. The next build will be slower while the cache fills again.
+## Cache size
+Each project keeps up to 5 GB of cache. The oldest entries are removed first when the limit is reached.
+-> build-failures
+
+@@ build-failures | Fix a failed build | Builds
+When a build fails, the deploy stops and the previous release keeps serving traffic, so users are not affected.
+## Out of memory
+The message "killed" or exit code 137 means the build ran out of its 4 GB of memory. Large front-end bundles are the usual cause. Reduce parallel jobs or build the assets in CI and commit the output.
+## Missing lockfile
+Buildpacks need a lockfile, such as package-lock.json or poetry.lock, to install the same versions every time. Commit the lockfile and deploy again.
+## Works on my machine
+If the build passes locally but fails here, clear the build cache, check that every environment variable needed at build time is set, and compare language versions. Pin the runtime version in acme.toml.
+-> build-cache
+-> logs
+
+@@ deploys | How deploys work | Deploys
+A deploy builds your code, starts the new release next to the old one, and switches traffic once the new release is healthy.
+## Zero-downtime releases
+New instances must pass their health check before they receive requests. Old instances keep serving until the switch, then get 30 seconds to finish open requests before they stop. Users never see an error page during a normal deploy.
+## Deploying from Git
+Connect the repository in the dashboard to deploy automatically on every push to the main branch. Pushes to other branches can create preview environments.
+## Pausing traffic
+For planned work on a database you can switch on maintenance mode, which shows a holding page instead of your app.
+-> health-checks
+-> rollbacks
+-> maintenance-mode
+
+@@ health-checks | Health checks | Deploys
+Health checks tell the platform whether an instance is ready to receive traffic.
+## Configuring the check
+Set health_check.path in acme.toml, for example /healthz. The platform sends a GET request to that path every 10 seconds. Any response with a status code from 200 to 399 counts as healthy.
+## Timeouts and failures
+A check that takes longer than 5 seconds counts as a failure. After three failures in a row the instance is restarted. During a deploy, a new release that never becomes healthy within 5 minutes is cancelled and the old release keeps running.
+## What to check
+Keep the endpoint fast. Confirm the app can reach its database, but do not call slow external services, or one outside problem can restart every instance.
+-> deploys
+
+@@ rollbacks | Roll back a release | Deploys
+Every successful deploy creates a release that you can return to.
+## Rolling back
+Run acme rollback to return to the previous release, or acme rollback v42 to pick a specific one. In the dashboard open Deploys, find the release and choose Roll back. The old image starts again without a new build, so a rollback usually takes under a minute.
+## What is not rolled back
+A rollback restores your code and its settings at that time. It does not undo database migrations or changes to stored files. Write migrations that work with both the old and the new code, so you can always go back safely.
+## Keeping releases
+The last 50 releases are kept for each project.
+-> deploys
+-> database-backups
+
+@@ preview-environments | Preview environments | Deploys
+A preview environment is a temporary copy of your app for one pull request, so reviewers can try a change before it is merged.
+## Turning previews on
+Enable previews in the project settings. Each new pull request gets its own address, and the link is posted as a comment on the pull request.
+## Data in previews
+Previews use variables marked as preview values. Point them at a test database, never at production data.
+## Clean-up
+A preview is deleted when the pull request is merged or closed, or after 7 days without a new commit. Previews count towards your plan's instance hours.
+-> environment-variables
+-> usage-limits
+
+@@ custom-domains | Custom domains | Networking
+Every app gets an address ending in acme.app. You can also serve it from your own domain name.
+## Adding a domain
+Run acme domains add www.example.com or use the dashboard under Settings, Domains. The command prints the DNS record to create at your domain registrar.
+## DNS records
+For a subdomain such as www, create a CNAME record pointing to your app's acme.app address. For an apex domain without www, create the A and AAAA records shown in the dashboard. DNS changes can take up to 48 hours to reach everyone, but usually take minutes.
+## Checking progress
+Run acme domains check to see whether the records are correct and whether the certificate has been issued.
+-> tls-certificates
+
+@@ tls-certificates | HTTPS and TLS certificates | Networking
+Every app is served over HTTPS. Certificates are issued and renewed automatically, at no cost.
+## Automatic certificates
+After a custom domain's DNS records are correct, a certificate is issued within a few minutes. It is renewed 30 days before it expires, with no action from you.
+## Bringing your own certificate
+On the Business plan you can upload your own certificate and private key with acme certs add. You are then responsible for renewing it before it expires.
+## Redirecting HTTP
+Plain HTTP requests are redirected to HTTPS by default. You can also turn on HSTS in the domain settings so browsers always use the secure address.
+-> custom-domains
+
+@@ scaling | Scaling | Running apps
+You can give an app more instances, bigger instances, or both.
+## More instances
+Run acme scale web=3 to run three web instances. Requests are spread across them evenly. Use at least two instances in production, so a restart never leaves the app unavailable.
+## Instance sizes
+Sizes range from small, with 512 MB of memory, to xlarge, with 8 GB. Change it with acme scale web:large. Apps that keep crashing with out-of-memory errors usually need a bigger size, not more instances.
+## Autoscaling
+On paid plans you can set a minimum and maximum instance count. The platform adds instances when average CPU stays above 70 percent for three minutes and removes them when it stays below 30 percent.
+-> metrics
+-> regions
+
+@@ regions | Regions | Running apps
+A region is the data centre location where your app runs.
+## Choosing a region
+Pick the region closest to most of your users and to your database. The available regions are Frankfurt, London, Virginia, Oregon, Singapore and Sydney. Set it with the region field in acme.toml when the project is created.
+## Moving to another region
+A project cannot change region in place. Create a new project in the new region, copy its variables and secrets, restore your database from a backup, and switch your domain once it is healthy.
+## Running in several regions
+Business plan projects can run in more than one region at the same time. Traffic goes to the nearest healthy region.
+-> scaling
+-> database-backups
+
+@@ logs | Logs | Monitoring
+Anything your app prints to standard output or standard error is collected as logs.
+## Viewing logs
+Run acme logs to see recent lines, or acme logs --tail to follow them live. Filter by process with --process worker. The dashboard has the same view with search.
+## Retention
+Logs are kept for 7 days on the Starter plan and 30 days on paid plans.
+## Sending logs elsewhere
+A log drain forwards every line to another service over HTTPS or syslog. Add one with acme drains add followed by the destination address. Drains are useful for keeping logs longer or searching them with your own tools.
+-> metrics
+-> alerts
+
+@@ metrics | Metrics | Monitoring
+The Metrics tab shows how your app is behaving over time.
+## Available charts
+Charts cover CPU use, memory use, requests per minute, response time at the 50th, 95th and 99th percentile, and the share of responses with a 5xx status code.
+## Reading the charts
+A slow climb in memory that resets on every deploy usually means a memory leak. A jump in response time together with high CPU suggests the app needs more instances. Events such as deploys and restarts are marked on every chart.
+## Exporting metrics
+Metrics can be read through the REST API, one data point per minute, for the last 14 days.
+-> alerts
+-> scaling
+
+@@ alerts | Alerts | Monitoring
+Alerts notify you when something is wrong, so you do not have to watch the dashboard.
+## Creating an alert rule
+Open Monitoring, Alerts and choose a metric, a threshold and a duration, for example error rate above 2 percent for 5 minutes. A rule can also fire when an instance crashes or a deploy fails.
+## Notification channels
+Alerts can be sent by email, to a webhook address, or to a team chat channel. Each rule can use several channels.
+## Avoiding noise
+Use a duration of at least a few minutes so short spikes do not wake anyone up. Every alert also sends a message when the problem is resolved.
+-> metrics
+-> webhooks
+
+@@ cron-jobs | Scheduled jobs | Running apps
+Scheduled jobs run a command on a timetable, such as a nightly report or clearing old sessions.
+## Defining a job
+Add a cron section to acme.toml with a schedule and a command, for example schedule = "0 3 * * *" to run at 03:00 every day. Times are in UTC.
+## How jobs run
+Each run starts a fresh instance from the current release with the same variables and secrets as the app. A run that lasts longer than 60 minutes is stopped.
+## Checking results
+Run acme cron list to see the last run of every job and its exit code. Output appears in the logs under the process name cron.
+-> background-workers
+-> logs
+
+@@ background-workers | Background workers | Running apps
+A worker is a process that does slow work outside a web request, such as sending emails or resizing images.
+## Adding a worker
+Add a worker entry under processes in acme.toml with its start command. Workers do not receive HTTP traffic and do not need a health check path.
+## Queues
+Workers usually read jobs from a queue. A managed Redis can be added with acme addons add redis, and its address is set in the REDIS_URL variable.
+## Scaling workers
+Scale workers separately from the web process, for example acme scale worker=4. When a deploy happens, workers receive a stop signal and have 30 seconds to finish the current job.
+-> cron-jobs
+-> scaling
+
+@@ databases | Managed PostgreSQL | Data
+Acme Deploy can run a PostgreSQL database for your app.
+## Creating a database
+Run acme db create. The connection address is stored in the DATABASE_URL variable of the project, so your app can connect without extra setup.
+## Connecting from your computer
+Run acme db shell to open a psql session, or acme db proxy to forward the database to a local port for your own tools.
+## Upgrading
+Database plans can be changed in the dashboard. Moving to a bigger plan takes a short read-only period of under a minute.
+-> database-backups
+
+@@ database-backups | Database backups and restore | Data
+Managed databases are backed up automatically.
+## Daily backups
+A full backup is taken every day and kept for 7 days on the Starter plan and 30 days on paid plans. Run acme db backups to list them.
+## Point-in-time recovery
+Paid plans can restore the database to any minute within the retention window. This is the way to recover from an accidental delete or a bad migration. The restore creates a new database, so the current one is untouched until you switch.
+## Manual backups
+Run acme db backup before risky work to take an extra backup on demand. You can also download any backup as a dump file.
+-> databases
+-> rollbacks
+
+@@ object-storage | Object storage | Data
+Object storage keeps files such as user uploads, images and exports outside your app instances.
+## Why not the local disk
+The disk of an instance is temporary. It is wiped on every deploy and restart, and it is not shared between instances. Files that must last belong in object storage.
+## Creating a bucket
+Run acme buckets create uploads. Access keys are added to the project as secrets. The storage speaks the common S3 protocol, so most libraries work unchanged.
+## Public files
+Buckets are private by default. Mark a bucket public to serve images directly, or create signed links that expire after a set time.
+-> secrets
+
+@@ teams-and-roles | Teams and roles | Accounts
+Teams let several people work on the same projects with different permissions.
+## Roles
+Owners manage billing and can delete the team. Admins manage members, domains and secrets. Developers can deploy, view logs and change variables. Viewers can only look at dashboards and logs.
+## Inviting people
+Open Team settings, Members and invite by email address. The invitation is valid for 7 days. Each team needs at least one owner.
+## Removing people
+Removing a member ends their sessions at once and revokes their API tokens for this team.
+-> single-sign-on
+-> audit-log
+
+@@ single-sign-on | Single sign-on | Accounts
+Business plan teams can require members to sign in through their company's identity provider.
+## Setting it up
+Single sign-on supports SAML 2.0 and OpenID Connect. Enter the details from your identity provider under Team settings, Security, then test the connection with your own account before turning it on for everyone.
+## Enforcing sign-on
+Once enforced, members must use the identity provider and their passwords no longer work. Owners keep a recovery code in case the identity provider is down.
+## Automatic accounts
+New users who sign in through the identity provider can be added to the team automatically with the Developer role.
+-> teams-and-roles
+
+@@ api-tokens | API tokens | Accounts
+API tokens let scripts and CI jobs use the CLI and the REST API without a browser login.
+## Creating a token
+Open Account settings, Tokens and choose Create token. Give it a name, a team and an expiry date. The token is shown once, so copy it into your CI secret store straight away.
+## Scopes
+A token can be limited to reading, deploying or full access. Use the smallest scope that works.
+## Revoking a token
+Delete a token in Account settings to stop it working immediately. Tokens that have not been used for 90 days are flagged so you can remove them.
+-> cli-login
+-> rest-api
+
+@@ webhooks | Webhooks | Integrations
+Webhooks send an HTTP POST request to your address when something happens in a project.
+## Events
+You can subscribe to deploy started, deploy succeeded, deploy failed, instance crashed and alert fired.
+## Verifying requests
+Every request carries an Acme-Signature header, an HMAC SHA-256 of the body made with your webhook secret. Compare it before trusting the request, and reject anything older than five minutes to block replays.
+## Retries
+If your endpoint does not answer with a 2xx status within 10 seconds, the request is retried up to five times over an hour.
+-> alerts
+-> rest-api
+
+@@ rest-api | REST API | Integrations
+Everything in the dashboard is also available through the REST API.
+## Authentication
+Send an API token in the Authorization header as a Bearer token.
+## Rate limits
+Each token may make 600 requests per minute. When you go over, the API answers with status 429 and a Retry-After header saying how many seconds to wait.
+## Pagination
+List endpoints return 50 items per page and a next link. Follow the next link until it is empty to read the full list.
+-> api-tokens
+-> webhooks
+
+@@ billing | Billing and invoices | Accounts
+Billing is handled per team.
+## Plans
+The Starter plan is free and suited to hobby projects. The Pro plan adds autoscaling, longer log retention and point-in-time database recovery. The Business plan adds single sign-on, several regions and your own certificates.
+## Invoices
+Invoices are issued on the first day of each month and emailed to the billing contact. Download past invoices as PDF from Team settings, Billing. You can add a tax number and company address to future invoices.
+## Payment methods
+Pay by card on every plan. Business plan customers can also pay by bank transfer against an annual invoice. If a payment fails, we retry for 14 days before projects are paused.
+-> usage-limits
+
+@@ usage-limits | Plan limits and usage | Accounts
+Each plan includes a monthly allowance of instance hours, bandwidth and build minutes.
+## Checking usage
+The Usage page shows how much of each allowance the team has used this month and a forecast for the full month.
+## Going over the allowance
+On the Starter plan, apps are paused when an allowance runs out and start again at the beginning of the next month. On paid plans extra usage is charged at the rates on the pricing page, and you can set a spending cap.
+## Spending caps
+A spending cap stops extra charges above an amount you choose. When the cap is reached, preview environments stop first, then the remaining apps scale down to one instance.
+-> billing
+-> preview-environments
+
+@@ audit-log | Audit log | Accounts
+The audit log records who did what in a team.
+## What is recorded
+Deploys, rollbacks, changes to variables and secrets, domain changes, member changes and token creation are all recorded with the person, the time and the IP address. Secret values are never written to the log.
+## Viewing and exporting
+Admins and owners can search the log under Team settings, Audit log, and export it as CSV. Entries are kept for one year.
+-> teams-and-roles
+-> data-export
+
+@@ delete-project | Delete a project | Projects
+Deleting a project stops its apps and removes its data.
+## Before you delete
+Download any database backups and files you want to keep. Remove your custom domains from the project so the DNS records can be reused elsewhere.
+## Deleting
+Open the project settings and choose Delete project, then type the project name to confirm. Only owners and admins can do this.
+## What happens to the data
+Apps stop immediately. Databases, buckets and backups are kept for 7 days in case you change your mind, and then erased permanently. Contact support within those 7 days to restore the project.
+-> transfer-project
+-> data-export
+
+@@ transfer-project | Move a project to another team | Projects
+You can move a project to another team, for example when a client takes over an app you built.
+## Requirements
+You must be an owner or admin of both teams. The receiving team's plan must support every feature the project uses, such as several regions.
+## What moves
+Apps, databases, buckets, domains, variables and secrets all move with the project, and the app keeps running during the move. Release history moves too. API tokens of the old team stop working for this project.
+## Billing after the move
+Charges for the current month are split by the number of days in each team.
+-> delete-project
+-> teams-and-roles
+
+@@ data-export | Export your data | Projects
+You can take a complete copy of your data at any time.
+## Exporting a project
+Run acme export to download a zip file with acme.toml, the list of variable names, release history and domain settings. Secret values are not included and must be copied from where you keep them.
+## Personal data requests
+To get a copy of the personal data held about your account, or to ask for it to be erased, contact support from the account email address. Requests are answered within 30 days.
+-> database-backups
+-> audit-log
+
+@@ status-and-incidents | Platform status | Help
+The status page shows the health of every region and service.
+## Subscribing to updates
+Subscribe on the status page to receive incident updates by email or RSS. Incidents are posted when they are found and updated at least every 30 minutes until they are resolved.
+## After an incident
+Every major incident gets a written report within five working days, describing the cause and what will stop it happening again.
+-> support
+
+@@ support | Get help | Help
+There are several ways to get help with Acme Deploy.
+## Community forum
+The forum is the fastest place for general questions and is read by the support team.
+## Support tickets
+Paid plans can open a ticket from the dashboard. Pro tickets are answered within one working day, and Business tickets within four hours at any time of day. Include your project name and the output of acme version.
+## Reporting a security issue
+Report security problems to the security team by email. Do not post them on the forum.
+-> status-and-incidents
+
+@@ monorepos | Monorepos | Configuration
+A monorepo holds several apps in one Git repository.
+## Deploying a subfolder
+Set root_dir in acme.toml to the folder of the app, for example apps/web. The build only sees that folder unless you also list shared folders under build.include.
+## Skipping unrelated builds
+Set build.watch to a list of paths. A push that changes none of those paths does not start a new deploy, which saves build minutes.
+-> config-file
+-> builds
+
+@@ maintenance-mode | Maintenance mode | Deploys
+Maintenance mode shows a holding page instead of your app, for example during a large database migration.
+## Turning it on and off
+Run acme maintenance on and acme maintenance off. The page returns status 503 with a Retry-After header, so search engines do not drop your pages.
+## Custom page
+Add a maintenance.html file to the project settings to replace the default holding page with your own design.
+-> deploys
+
+@@ outbound-ips | Static outbound IP addresses | Networking
+Some services only accept connections from known IP addresses, such as a partner's API or a database behind a firewall.
+## Static outbound addresses
+On paid plans you can turn on static outbound IPs for a project. All outgoing traffic from the app then leaves through two fixed addresses per region, shown in the networking settings.
+## Adding them to an allowlist
+Give both addresses to the other service so it accepts your connections even if traffic moves between them.
+-> regions

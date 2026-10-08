@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Managed PostgreSQL - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Data</nav>
+<h1>Managed PostgreSQL</h1>
+<p>Acme Deploy can run a PostgreSQL database for your app.</p>
+<h2>Creating a database</h2>
+<p>Run acme db create. The connection address is stored in the DATABASE_URL variable of the project, so your app can connect without extra setup.</p>
+<h2>Connecting from your computer</h2>
+<p>Run acme db shell to open a psql session, or acme db proxy to forward the database to a local port for your own tools.</p>
+<h2>Upgrading</h2>
+<p>Database plans can be changed in the dashboard. Moving to a bigger plan takes a short read-only period of under a minute.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/database-backups.html">Database backups and restore</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

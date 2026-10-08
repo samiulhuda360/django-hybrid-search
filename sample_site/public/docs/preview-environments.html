@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Preview environments - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Deploys</nav>
+<h1>Preview environments</h1>
+<p>A preview environment is a temporary copy of your app for one pull request, so reviewers can try a change before it is merged.</p>
+<h2>Turning previews on</h2>
+<p>Enable previews in the project settings. Each new pull request gets its own address, and the link is posted as a comment on the pull request.</p>
+<h2>Data in previews</h2>
+<p>Previews use variables marked as preview values. Point them at a test database, never at production data.</p>
+<h2>Clean-up</h2>
+<p>A preview is deleted when the pull request is merged or closed, or after 7 days without a new commit. Previews count towards your plan&#x27;s instance hours.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/environment-variables.html">Environment variables</a></li><li><a href="/docs/usage-limits.html">Plan limits and usage</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

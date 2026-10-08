@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fix a failed build - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Builds</nav>
+<h1>Fix a failed build</h1>
+<p>When a build fails, the deploy stops and the previous release keeps serving traffic, so users are not affected.</p>
+<h2>Out of memory</h2>
+<p>The message &quot;killed&quot; or exit code 137 means the build ran out of its 4 GB of memory. Large front-end bundles are the usual cause. Reduce parallel jobs or build the assets in CI and commit the output.</p>
+<h2>Missing lockfile</h2>
+<p>Buildpacks need a lockfile, such as package-lock.json or poetry.lock, to install the same versions every time. Commit the lockfile and deploy again.</p>
+<h2>Works on my machine</h2>
+<p>If the build passes locally but fails here, clear the build cache, check that every environment variable needed at build time is set, and compare language versions. Pin the runtime version in acme.toml.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/build-cache.html">Build cache</a></li><li><a href="/docs/logs.html">Logs</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Scaling - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Running apps</nav>
+<h1>Scaling</h1>
+<p>You can give an app more instances, bigger instances, or both.</p>
+<h2>More instances</h2>
+<p>Run acme scale web=3 to run three web instances. Requests are spread across them evenly. Use at least two instances in production, so a restart never leaves the app unavailable.</p>
+<h2>Instance sizes</h2>
+<p>Sizes range from small, with 512 MB of memory, to xlarge, with 8 GB. Change it with acme scale web:large. Apps that keep crashing with out-of-memory errors usually need a bigger size, not more instances.</p>
+<h2>Autoscaling</h2>
+<p>On paid plans you can set a minimum and maximum instance count. The platform adds instances when average CPU stays above 70 percent for three minutes and removes them when it stays below 30 percent.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/metrics.html">Metrics</a></li><li><a href="/docs/regions.html">Regions</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

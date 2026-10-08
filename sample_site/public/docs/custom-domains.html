@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Custom domains - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Networking</nav>
+<h1>Custom domains</h1>
+<p>Every app gets an address ending in acme.app. You can also serve it from your own domain name.</p>
+<h2>Adding a domain</h2>
+<p>Run acme domains add www.example.com or use the dashboard under Settings, Domains. The command prints the DNS record to create at your domain registrar.</p>
+<h2>DNS records</h2>
+<p>For a subdomain such as www, create a CNAME record pointing to your app&#x27;s acme.app address. For an apex domain without www, create the A and AAAA records shown in the dashboard. DNS changes can take up to 48 hours to reach everyone, but usually take minutes.</p>
+<h2>Checking progress</h2>
+<p>Run acme domains check to see whether the records are correct and whether the certificate has been issued.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/tls-certificates.html">HTTPS and TLS certificates</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Build with a Dockerfile - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Builds</nav>
+<h1>Build with a Dockerfile</h1>
+<p>Use a Dockerfile when you need system packages, a specific base image or full control over the image.</p>
+<h2>Requirements</h2>
+<p>The image must start a process that listens on the port set in acme.toml. Multi-stage builds are supported and keep the final image small. Build arguments can be passed with build.args in acme.toml.</p>
+<h2>Private base images</h2>
+<p>To pull a base image from a private registry, save the registry password as a secret named REGISTRY_PASSWORD and set build.registry_user in acme.toml.</p>
+<h2>Tips</h2>
+<p>Copy dependency files and install packages before copying the rest of the source code. Docker then reuses the dependency layer when only your code changes, which makes builds much faster.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/build-cache.html">Build cache</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

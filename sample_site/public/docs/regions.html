@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Regions - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Running apps</nav>
+<h1>Regions</h1>
+<p>A region is the data centre location where your app runs.</p>
+<h2>Choosing a region</h2>
+<p>Pick the region closest to most of your users and to your database. The available regions are Frankfurt, London, Virginia, Oregon, Singapore and Sydney. Set it with the region field in acme.toml when the project is created.</p>
+<h2>Moving to another region</h2>
+<p>A project cannot change region in place. Create a new project in the new region, copy its variables and secrets, restore your database from a backup, and switch your domain once it is healthy.</p>
+<h2>Running in several regions</h2>
+<p>Business plan projects can run in more than one region at the same time. Traffic goes to the nearest healthy region.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/scaling.html">Scaling</a></li><li><a href="/docs/database-backups.html">Database backups and restore</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>

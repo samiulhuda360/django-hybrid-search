@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Background workers - Acme Deploy docs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/docs.css">
+</head>
+<body>
+<header class="top"><a href="/index.html">Acme Deploy docs</a>
+<nav><a href="/index.html?ref=nav">All pages</a> <a href="/downloads/acme-cli-cheatsheet.txt">CLI cheat sheet</a></nav>
+</header>
+<main>
+<nav class="section">Running apps</nav>
+<h1>Background workers</h1>
+<p>A worker is a process that does slow work outside a web request, such as sending emails or resizing images.</p>
+<h2>Adding a worker</h2>
+<p>Add a worker entry under processes in acme.toml with its start command. Workers do not receive HTTP traffic and do not need a health check path.</p>
+<h2>Queues</h2>
+<p>Workers usually read jobs from a queue. A managed Redis can be added with acme addons add redis, and its address is set in the REDIS_URL variable.</p>
+<h2>Scaling workers</h2>
+<p>Scale workers separately from the web process, for example acme scale worker=4. When a deploy happens, workers receive a stop signal and have 30 seconds to finish the current job.</p>
+<aside><h2>See also</h2><ul><li><a href="/docs/cron-jobs.html">Scheduled jobs</a></li><li><a href="/docs/scaling.html">Scaling</a></li></ul></aside>
+</main>
+<footer>Acme Deploy is a fictional product used to demonstrate a search engine.</footer>
+</body>
+</html>
