@@ -1,0 +1,59 @@
+{"id": "k01", "query": "rollback release", "kind": "keyword", "relevant": {"/docs/rollbacks.html": 2, "/docs/deploys.html": 1}}
+{"id": "k02", "query": "custom domain CNAME record", "kind": "keyword", "relevant": {"/docs/custom-domains.html": 2, "/docs/tls-certificates.html": 1}}
+{"id": "k03", "query": "log drain syslog", "kind": "keyword", "relevant": {"/docs/logs.html": 2}}
+{"id": "k04", "query": "point-in-time recovery", "kind": "keyword", "relevant": {"/docs/database-backups.html": 2, "/docs/billing.html": 1}}
+{"id": "k05", "query": "acme.toml processes", "kind": "keyword", "relevant": {"/docs/config-file.html": 2, "/docs/background-workers.html": 1}}
+{"id": "k06", "query": "health check path timeout", "kind": "keyword", "relevant": {"/docs/health-checks.html": 2, "/docs/deploys.html": 1}}
+{"id": "k07", "query": "clear build cache", "kind": "keyword", "relevant": {"/docs/build-cache.html": 2, "/docs/build-failures.html": 1}}
+{"id": "k08", "query": "rotate secrets", "kind": "keyword", "relevant": {"/docs/secrets.html": 2}}
+{"id": "k09", "query": "webhook signature HMAC", "kind": "keyword", "relevant": {"/docs/webhooks.html": 2}}
+{"id": "k10", "query": "API rate limit 429", "kind": "keyword", "relevant": {"/docs/rest-api.html": 2}}
+{"id": "k11", "query": "SAML single sign-on", "kind": "keyword", "relevant": {"/docs/single-sign-on.html": 2, "/docs/billing.html": 1}}
+{"id": "k12", "query": "autoscaling CPU threshold", "kind": "keyword", "relevant": {"/docs/scaling.html": 2, "/docs/metrics.html": 1}}
+{"id": "k13", "query": "preview environments pull request", "kind": "keyword", "relevant": {"/docs/preview-environments.html": 2, "/docs/deploys.html": 1}}
+{"id": "k14", "query": "cron schedule UTC", "kind": "keyword", "relevant": {"/docs/cron-jobs.html": 2}}
+{"id": "k15", "query": "export audit log CSV", "kind": "keyword", "relevant": {"/docs/audit-log.html": 2}}
+{"id": "k16", "query": "maintenance mode 503", "kind": "keyword", "relevant": {"/docs/maintenance-mode.html": 2}}
+{"id": "k17", "query": "static outbound IP allowlist", "kind": "keyword", "relevant": {"/docs/outbound-ips.html": 2}}
+{"id": "k18", "query": "monorepo root_dir", "kind": "keyword", "relevant": {"/docs/monorepos.html": 2}}
+{"id": "k19", "query": "download invoice PDF", "kind": "keyword", "relevant": {"/docs/billing.html": 2}}
+{"id": "k20", "query": "transfer project to another team", "kind": "keyword", "relevant": {"/docs/transfer-project.html": 2, "/docs/teams-and-roles.html": 1}}
+{"id": "k21", "query": "Dockerfile multi-stage build", "kind": "keyword", "relevant": {"/docs/dockerfile-builds.html": 2, "/docs/builds.html": 1}}
+{"id": "k22", "query": "ACME_TOKEN login in CI", "kind": "keyword", "relevant": {"/docs/cli-login.html": 2, "/docs/api-tokens.html": 1}}
+{"id": "k23", "query": "install CLI on Windows", "kind": "keyword", "relevant": {"/docs/install-cli.html": 2}}
+{"id": "k24", "query": "exit code 137 killed", "kind": "keyword", "relevant": {"/docs/build-failures.html": 2}}
+{"id": "n01", "query": "undo a bad release", "kind": "natural", "relevant": {"/docs/rollbacks.html": 2, "/docs/database-backups.html": 1}}
+{"id": "n02", "query": "show visitors a back soon page during an upgrade", "kind": "natural", "relevant": {"/docs/maintenance-mode.html": 2}}
+{"id": "n03", "query": "use my own web address instead of the default one", "kind": "natural", "relevant": {"/docs/custom-domains.html": 2, "/docs/tls-certificates.html": 1}}
+{"id": "n04", "query": "get the padlock in the browser for my site", "kind": "natural", "relevant": {"/docs/tls-certificates.html": 2, "/docs/custom-domains.html": 1}}
+{"id": "n05", "query": "app keeps crashing because it runs out of RAM", "kind": "natural", "relevant": {"/docs/scaling.html": 2, "/docs/metrics.html": 1, "/docs/build-failures.html": 1}}
+{"id": "n06", "query": "recover a table I deleted by accident", "kind": "natural", "relevant": {"/docs/database-backups.html": 2, "/docs/rollbacks.html": 1}}
+{"id": "n07", "query": "where should uploaded images be kept", "kind": "natural", "relevant": {"/docs/object-storage.html": 2}}
+{"id": "n08", "query": "files disappear after every deploy", "kind": "natural", "relevant": {"/docs/object-storage.html": 2}}
+{"id": "n09", "query": "let a contractor ship code without seeing our passwords", "kind": "natural", "relevant": {"/docs/secrets.html": 2, "/docs/teams-and-roles.html": 2}}
+{"id": "n10", "query": "get a message in team chat when errors go up", "kind": "natural", "relevant": {"/docs/alerts.html": 2, "/docs/metrics.html": 1}}
+{"id": "n11", "query": "run a script every night", "kind": "natural", "relevant": {"/docs/cron-jobs.html": 2}}
+{"id": "n12", "query": "send emails outside the web request", "kind": "natural", "relevant": {"/docs/background-workers.html": 2}}
+{"id": "n13", "query": "partner firewall only accepts known addresses", "kind": "natural", "relevant": {"/docs/outbound-ips.html": 2}}
+{"id": "n14", "query": "what happens if I use more than my plan includes", "kind": "natural", "relevant": {"/docs/usage-limits.html": 2, "/docs/billing.html": 1}}
+{"id": "n15", "query": "avoid surprise charges on the bill", "kind": "natural", "relevant": {"/docs/usage-limits.html": 2, "/docs/billing.html": 1}}
+{"id": "n16", "query": "staff sign in with the company login", "kind": "natural", "relevant": {"/docs/single-sign-on.html": 2}}
+{"id": "n17", "query": "find out who changed a setting", "kind": "natural", "relevant": {"/docs/audit-log.html": 2}}
+{"id": "n18", "query": "hand over an app to a client", "kind": "natural", "relevant": {"/docs/transfer-project.html": 2}}
+{"id": "n19", "query": "remove an app permanently", "kind": "natural", "relevant": {"/docs/delete-project.html": 2}}
+{"id": "n20", "query": "request a copy of my data under GDPR", "kind": "natural", "relevant": {"/docs/data-export.html": 2}}
+{"id": "n21", "query": "builds are slow", "kind": "natural", "relevant": {"/docs/build-cache.html": 2, "/docs/dockerfile-builds.html": 1}}
+{"id": "n22", "query": "try a change before merging it", "kind": "natural", "relevant": {"/docs/preview-environments.html": 2}}
+{"id": "n23", "query": "is the platform having an outage", "kind": "natural", "relevant": {"/docs/status-and-incidents.html": 2}}
+{"id": "n24", "query": "talk to a person about a problem", "kind": "natural", "relevant": {"/docs/support.html": 2}}
+{"id": "n25", "query": "run the app closer to customers in Asia", "kind": "natural", "relevant": {"/docs/regions.html": 2}}
+{"id": "n26", "query": "tell my server when a deploy finishes", "kind": "natural", "relevant": {"/docs/webhooks.html": 2, "/docs/alerts.html": 1}}
+{"id": "n27", "query": "pages load slowly for users", "kind": "natural", "relevant": {"/docs/metrics.html": 2, "/docs/scaling.html": 1}}
+{"id": "n28", "query": "my laptop was stolen and it is logged in", "kind": "natural", "relevant": {"/docs/cli-login.html": 2, "/docs/api-tokens.html": 1}}
+{"id": "n29", "query": "keep logs for longer than a week", "kind": "natural", "relevant": {"/docs/logs.html": 2}}
+{"id": "n30", "query": "open the database from my own computer", "kind": "natural", "relevant": {"/docs/databases.html": 2}}
+{"id": "n31", "query": "two apps in one repository", "kind": "natural", "relevant": {"/docs/monorepos.html": 2}}
+{"id": "n32", "query": "new here, where do I start", "kind": "natural", "relevant": {"/docs/getting-started.html": 2, "/docs/install-cli.html": 1}}
+{"id": "n33", "query": "users see errors while a new version goes out", "kind": "natural", "relevant": {"/docs/deploys.html": 2, "/docs/health-checks.html": 1}}
+{"id": "n34", "query": "make an automation key read-only", "kind": "natural", "relevant": {"/docs/api-tokens.html": 2}}
+{"id": "n35", "query": "update the command line tool", "kind": "natural", "relevant": {"/docs/install-cli.html": 2}}
