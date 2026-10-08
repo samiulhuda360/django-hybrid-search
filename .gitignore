@@ -1,0 +1,10 @@
+# Local data: database, built index, downloaded models, AI answer cache
+var/
+.venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.env
+node_modules/

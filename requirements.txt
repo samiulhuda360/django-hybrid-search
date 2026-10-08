@@ -1,0 +1,8 @@
+Django>=5.2,<6
+requests>=2.32
+beautifulsoup4>=4.12
+snowballstemmer>=2.2
+numpy>=2.0
+fastembed>=0.7
+openai>=1.50
+defusedxml>=0.7

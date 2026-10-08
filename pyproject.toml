@@ -1,0 +1,39 @@
+[project]
+name = "django-hybrid-search"
+version = "1.0.0"
+description = "A Django search engine with a polite crawler, BM25 + embedding hybrid ranking and cited AI answers."
+requires-python = ">=3.11"
+license = "MIT"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["search/migrations"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "BLE", "A", "C4", "SIM", "RUF", "DJ"]
+ignore = ["S101", "RUF001", "RUF002", "RUF003"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S", "BLE"]
+"search/models.py" = ["RUF012"]
+
+[tool.mypy]
+python_version = "3.11"
+plugins = ["mypy_django_plugin.main"]
+strict = true
+disallow_subclassing_any = false
+disallow_any_generics = false
+exclude = ["search/migrations/", "tests/"]
+
+[[tool.mypy.overrides]]
+module = ["fastembed.*", "snowballstemmer.*"]
+ignore_missing_imports = true
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+testpaths = ["tests"]
+addopts = "-q"
