@@ -39,21 +39,21 @@ sentences instead.
 
 ## A real-life example
 
-Priya leads customer support at Acme Deploy, a small hosting company with 42 pages of help docs.
+Sarah leads customer support at Acme Deploy, a small hosting company with 42 pages of help docs.
 
 **Before:** the docs site had a plain keyword search. Customers wrote "files disappear after every deploy" or
-"undo a bad release", found nothing useful, and opened a ticket. Priya's team answered the same questions every
+"undo a bad release", found nothing useful, and opened a ticket. Sarah's team answered the same questions every
 week by pasting links to pages that already existed.
 
 **With Django Hybrid Search:**
 
-1. Priya adds a crawl job in the admin with the docs address and clicks **Run**. A minute later all 42 pages are
+1. Sarah adds a crawl job in the admin with the docs address and clicks **Run**. A minute later all 42 pages are
    indexed. The internal on-call runbook is skipped, because `robots.txt` blocks it.
 2. A customer types "files disappear after every deploy". The first result is "Object storage", with the
    sentence "It is wiped on every deploy" highlighted.
 3. Above the results, a two-sentence answer explains that the instance disk is temporary and that files belong in
    object storage. Each sentence ends with a numbered link to its source page.
-4. When the docs change, Priya runs the job again and the index rebuilds itself.
+4. When the docs change, Sarah runs the job again and the index rebuilds itself.
 
 **After:** on the labelled test set of plain-language questions, 90% of the pages that fully answer them appear
 in the top five results with hybrid ranking, against 80% with keyword search alone (Recall@5, 35 queries).
